@@ -5,16 +5,37 @@ using System.Text.Json;
 Setup();
 
 var movie = Setup();
+var s = HtmlTabloOlustur(movie);
 
+File.WriteAllText("output.html", s.ToString());
 
-
-
-string HtmlTabloOlustur(Movie movie)
+StringBuilder HtmlTabloOlustur(List<Movie> movie)
 {
-    var sb = new StringBuilder();
-
-
-    return "s";
+    var htmlNesne = new StringBuilder();
+    htmlNesne.Append("<table>\n");
+    htmlNesne.Append("\t<th>\n");
+    htmlNesne.Append("\t\t<tr>\n");
+    htmlNesne.Append("\t\t\t<td>id</td>\n");
+    htmlNesne.Append("\t\t\t<td>title</td>\n");
+    htmlNesne.Append("\t\t\t<td>rating</td>\n");
+    htmlNesne.Append("\t\t\t<td>genre</td>\n");
+    htmlNesne.Append("\t\t\t<td>duration</td>\n");
+    htmlNesne.Append("\t\t<tr>\n");
+    htmlNesne.Append("\t<th>\n");
+    htmlNesne.Append("\t<tbody>\n");
+    foreach (var item in movie)
+    {
+        htmlNesne.Append("\t\t<tr>\n");
+        htmlNesne.Append($"\t\t\t<td>{item.Id}</td>\n");
+        htmlNesne.Append($"\t\t\t<td>{item.Title}</td>\n");
+        htmlNesne.Append($"\t\t\t<td>{item.Rating}</td>\n");
+        htmlNesne.Append($"\t\t\t<td>{item.Genre}</td>\n");
+        htmlNesne.Append($"\t\t\t<td>{item.Duration}</td>\n");
+        htmlNesne.Append("\t\t<tr>\n");
+    }
+    htmlNesne.Append("\t<tbody>\n");
+    htmlNesne.Append("<table>");
+    return htmlNesne;
 }
 
 static List<Movie> Setup()
